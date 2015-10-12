@@ -1,0 +1,1 @@
+int is_prefect_num(int x);
