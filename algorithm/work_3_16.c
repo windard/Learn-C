@@ -45,7 +45,7 @@ datatype *DeQueueQ(struct sequeue *sq){
 		return NULL;
 	}else{
 		ret = (datatype *)malloc(sizeof(datatype));
-		*ret = sq->data[(sq->rear)%MAXSIZE];
+		*ret = sq->data[(sq->rear-sq->length+1)%MAXSIZE];
 		sq->rear--;
 		sq->quelen--;
 		return ret;
