@@ -2,7 +2,7 @@
 
 int main()
 {
-	LoadLibary("msvcrt.dll");
+	LoadLibrary("msvcrt.dll");
 	system("command.com");
 	return 0;
 }
