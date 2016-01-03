@@ -69,3 +69,22 @@ stdlib.h
 　　int _Cdecl kbhit (void);
 　　int _Cdecl putch (int c);
 　　int _Cdecl ungetch (int ch);
+
+
+
+	/*
+	*
+	*
+	*相当相当重要的一件事
+	*在C语言里
+	*无论是getchar()
+	*还是scanf("%c",&XX)
+	*在每次输入之后都要清屏
+	*不然上次输入最后的换行符
+	*会被下一个输入当做第一个
+	*切记
+	*切记
+	*fflush(stdin);
+	*
+	*/
+
