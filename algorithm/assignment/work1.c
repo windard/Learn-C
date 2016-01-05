@@ -9,11 +9,9 @@ typedef struct node{
 
 node * Create(int num){
 	node *head,*P,*L;
-//	int		num;
 	int		i,j;
 	head = (node*)malloc(sizeof(node));
 	P = head;
-//	scanf("%d",&num);
 	for(i=0;i<num;i++){
 		L = (node*)malloc(sizeof(node));
 		L->data = i+1;
@@ -21,20 +19,13 @@ node * Create(int num){
 		P = L;
 	}
 	P->next = head->next;
-/*	scanf("%d",&num);
-	for(i=0;i<num;i++){
-		L = (node*)malloc(sizeof(node));
-		L->data = i+1;
 
-	}
-*/
   return head->next;
 }
 
 void Sort(node *head,int ch){
 	node *P,*L,*rear;
 	int i;
-//	P = head;
 	rear = (node*)malloc(sizeof(node));
 	rear->next = head;
 	P = rear;
@@ -57,11 +48,6 @@ void Output(node *P){
 	node *head,*L;
 	L = P;
 	head = P;
-/*	while(head!=L){
-		printf("%d ",head->data);
-		head = head->next;
-	}
-*/
 	do{
 		printf("%d ",head->data);
 		head = head->next;
@@ -80,6 +66,5 @@ int main(void){
 	}
 	head = Create(num);
 	Sort(head,ch);
-//	Output(head);
 	return 0;
 }

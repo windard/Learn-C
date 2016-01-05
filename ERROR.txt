@@ -6,6 +6,8 @@
 	*不要忘了#include<conio.h>
 	*当然，标准的输入入输出printf和scanf
 	*就是需要#include<stdio.h>
+	*如果有字符串操作
+	*则需要#include<string.h>
 	*
 	*/
 	/*
