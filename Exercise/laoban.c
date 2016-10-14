@@ -30,10 +30,10 @@ void Output(linklist *L){
 	head = L;
 	head = head->next;
 	while(head->next!=NULL){
-		printf("%3d",head->data );
+		printf("%4d",head->data );
 		head = head->next;
 	}
-	printf("%3d",head->data );
+	printf("%4d",head->data );
 }
 
 int main()
@@ -83,10 +83,10 @@ void Output(linklist *L){
 	head = L;
 	head = head->next;
 	while(head->next!=NULL){
-		printf("%3d",head->data );
+		printf("%4d",head->data );
 		head = head->next;
 	}
-	printf("%3d",head->data );
+	printf("%4d",head->data );
 }
 
 int main()
@@ -97,15 +97,15 @@ int main()
 	head = L;
 	do{
 		printf("Please Input Num (Num <= 30):");
-		scanf("%d",&num);		
+		scanf("%4d",&num);
 	}while(num>30);
 	for (int j = 0; j < 7; ++j)
 	{
 		for (int i = 0; i < num-2; i++)
-		{	
+		{
 			head = head->next;
 		}
-		printf("%3d",head->next->num);
+		printf("%4d",head->next->num);
 		num = head->next->data;
 		head->next = head->next->next;
 		if(num != 1)
@@ -136,7 +136,7 @@ linklist * CreatList(){
 	for (int i = 0; i < 6; ++i)
 	{
 		s = (linklist*)malloc(sizeof(linklist));
-		scanf("%d",&ch);
+		scanf("%4d",&ch);
 		s->data = ch;
 		r->next = s;
 		r = s;
@@ -150,10 +150,10 @@ void Output(linklist *L){
 	head = L;
 	head = head->next;
 	while(head->next!=NULL){
-		printf("%3d",head->data );
+		printf("%4d",head->data );
 		head = head->next;
 	}
-	printf("%3d\n",head->data );
+	printf("%4d\n",head->data );
 }
 
 
@@ -172,7 +172,7 @@ void Backword(linklist * L){
 		}
 		head->next = s;
 		head = s;
-		s = p;	
+		s = p;
 	}
 	head->next = NULL;
 }
@@ -209,7 +209,7 @@ linklist * CreatList(){
 	for (int i = 0; i < 6; ++i)
 	{
 		s = (linklist*)malloc(sizeof(linklist));
-		scanf("%d",&ch);
+		scanf("%4d",&ch);
 		s->data = ch;
 		r->next = s;
 		r = s;
@@ -223,10 +223,10 @@ void Output(linklist *L){
 	head = L;
 	head = head->next;
 	while(head->next!=NULL){
-		printf("%3d",head->data );
+		printf("%4d",head->data );
 		head = head->next;
 	}
-	printf("%3d\n",head->data );
+	printf("%4d\n",head->data );
 }
 
 void Delete(linklist *L,int min,int max){
@@ -246,11 +246,99 @@ int main(int argc, char const *argv[])
 	L = CreatList();
 	Output(L);
 	printf("Please Input Min:");
-	scanf("%d",&min);
+	scanf("%4d",&min);
 	printf("Please Input Max:");
-	scanf("%d",&max);
+	scanf("%4d",&max);
 	Delete(L,min,max);
 	Output(L);
 	return 0;
 }
 ***********************************************************************************/
+
+/************************************** 第四题 **********************************************
+#include "stdio.h"
+// #include "conio.h"
+#include "stdlib.h"
+
+typedef int datatype;
+typedef struct node
+{
+	datatype	 	data;
+	struct  node   *next;
+}linklist;
+
+linklist * CreatList(){
+	int 			ch;
+	linklist		*head,*s,*r;
+	head = (linklist*)malloc(sizeof(linklist));
+	r = head;
+	for (int i = 0; i < 6; ++i)
+	{
+		s = (linklist*)malloc(sizeof(linklist));
+		scanf("%4d",&ch);
+		s->data = ch;
+		r->next = s;
+		r = s;
+	}
+	r->next = NULL;
+	return head;
+}
+
+void Output(linklist *L){
+	linklist 	*head;
+	head = L;
+	head = head->next;
+	while(head->next!=NULL){
+		printf("%4d",head->data );
+		head = head->next;
+	}
+	printf("%4d\n",head->data );
+}
+
+int FindMin(linklist *L){
+	linklist 	*head;
+	int 	min;
+	head = L;
+	head = head->next;
+	min = head->data;
+	while(head!=NULL){
+		if(head->data<min)
+			min = head->data;
+		head = head->next;
+	}
+	return min;
+}
+
+void ChangeOrDelete(linklist *L,int min){
+	linklist 	*head;
+	head = L;
+	head = head->next;
+	while(head->next!=NULL){
+		if(head->data == min){
+			if(min%2!=0){
+				head->data = head->next->data;
+				head->next->data = min;
+				break;
+			}else{
+				head->next = head->next->next;
+				break;
+			}
+		}
+		head = head->next;
+	}
+}
+
+int main(int argc, char const *argv[])
+{
+	linklist	*L;
+	int 	min;
+	L = CreatList();
+	Output(L);
+	min = FindMin(L);
+	printf("The Min Is :%4d\n",min );
+	ChangeOrDelete(L,min);
+	Output(L);
+	return 0;
+}
+
+**************************************************************************************/
