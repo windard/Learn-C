@@ -59,15 +59,18 @@ typedef struct node
 	struct  node   *next;
 }linklist;
 
+// 创建链表
 linklist * CreatList(){
 	int 			ch;
 	linklist		*head,*s,*r;
 	int				nums[7] = {3,1,7,2,4,8,4};
+	// 创建头结点
 	head = (linklist*)malloc(sizeof(linklist));
 	r = head;
 	r->data = nums[0];
 	r->num = 1;
     for(int i=0;i<6;i++){
+    	// 为每一个数值创建一个节点
 		s = (linklist*)malloc(sizeof(linklist));
 		s->data = nums[i+1];
 		s->num = i+2;
@@ -78,11 +81,13 @@ linklist * CreatList(){
 	return head;
 }
 
+// 输出链表
 void Output(linklist *L){
 	linklist 	*head;
 	head = L;
 	head = head->next;
 	while(head->next!=NULL){
+		// 输出每一个数值
 		printf("%4d",head->data );
 		head = head->next;
 	}
@@ -96,9 +101,11 @@ int main()
 	L = CreatList();
 	head = L;
 	do{
+		// 选取初始 m 值
 		printf("Please Input Num (Num <= 30):");
 		scanf("%4d",&num);
 	}while(num>30);
+	// 双重循环辨别输出
 	for (int j = 0; j < 7; ++j)
 	{
 		for (int i = 0; i < num-2; i++)
@@ -128,9 +135,11 @@ typedef struct node
 	struct  node   *next;
 }linklist;
 
+// 创建链表
 linklist * CreatList(){
 	int 			ch;
 	linklist		*head,*s,*r;
+	// 创建第一个节点
 	head = (linklist*)malloc(sizeof(linklist));
 	r = head;
 	for (int i = 0; i < 6; ++i)
@@ -145,6 +154,7 @@ linklist * CreatList(){
 	return head;
 }
 
+// 输出链表
 void Output(linklist *L){
 	linklist 	*head;
 	head = L;
@@ -156,7 +166,7 @@ void Output(linklist *L){
 	printf("%4d\n",head->data );
 }
 
-
+// 将链表逆置
 void Backword(linklist * L){
 	linklist 	*head,*p,*s;
 	p = L->next;
@@ -189,7 +199,7 @@ int main(int argc, char const *argv[])
 
 ***************************************************************************/
 
-/******************************* 第六题 **************************************
+/*********************************** 第六题 ******************************************
 #include "stdio.h"
 #include "conio.h"
 #include "stdlib.h"
@@ -201,13 +211,16 @@ typedef struct node
 	struct  node   *next;
 }linklist;
 
+// 创建链表
 linklist * CreatList(){
 	int 			ch;
 	linklist		*head,*s,*r;
+	// 创建头结点
 	head = (linklist*)malloc(sizeof(linklist));
 	r = head;
 	for (int i = 0; i < 6; ++i)
 	{
+		// 为每一个数值创建一个节点
 		s = (linklist*)malloc(sizeof(linklist));
 		scanf("%4d",&ch);
 		s->data = ch;
@@ -218,6 +231,7 @@ linklist * CreatList(){
 	return head;
 }
 
+// 输出链表
 void Output(linklist *L){
 	linklist 	*head;
 	head = L;
@@ -229,13 +243,15 @@ void Output(linklist *L){
 	printf("%4d\n",head->data );
 }
 
+// 删除节点
 void Delete(linklist *L,int min,int max){
 	linklist 	*head;
 	head = L;
 	while(head->next!=NULL){
 		if(head->next->data > min && head->next->data < max)
+			head = head->next;
+		else
 			head->next = head->next->next;
-		head = head->next;
 	}
 }
 
@@ -245,15 +261,18 @@ int main(int argc, char const *argv[])
 	int 		min,max;
 	L = CreatList();
 	Output(L);
+	// 输入最小值
 	printf("Please Input Min:");
 	scanf("%4d",&min);
+	// 输入最大值
 	printf("Please Input Max:");
 	scanf("%4d",&max);
 	Delete(L,min,max);
 	Output(L);
 	return 0;
 }
-***********************************************************************************/
+
+******************************************************************************************
 
 /************************************** 第四题 **********************************************
 #include "stdio.h"
@@ -267,13 +286,16 @@ typedef struct node
 	struct  node   *next;
 }linklist;
 
+// 创建链表
 linklist * CreatList(){
 	int 			ch;
 	linklist		*head,*s,*r;
+	// 创建头结点
 	head = (linklist*)malloc(sizeof(linklist));
 	r = head;
 	for (int i = 0; i < 6; ++i)
 	{
+		// 为每一个数值创建节点
 		s = (linklist*)malloc(sizeof(linklist));
 		scanf("%4d",&ch);
 		s->data = ch;
@@ -284,6 +306,7 @@ linklist * CreatList(){
 	return head;
 }
 
+// 输出链表
 void Output(linklist *L){
 	linklist 	*head;
 	head = L;
@@ -295,6 +318,7 @@ void Output(linklist *L){
 	printf("%4d\n",head->data );
 }
 
+// 找到最小值
 int FindMin(linklist *L){
 	linklist 	*head;
 	int 	min;
@@ -316,10 +340,12 @@ void ChangeOrDelete(linklist *L,int min){
 	while(head->next!=NULL){
 		if(head->data == min){
 			if(min%2!=0){
+				// 奇数就交换
 				head->data = head->next->data;
 				head->next->data = min;
 				break;
 			}else{
+				// 偶数就删除
 				head->next = head->next->next;
 				break;
 			}
@@ -350,13 +376,17 @@ int main(int argc, char const *argv[])
 
 typedef char datatype;
 
+// 定义结构体
 struct Node {
 	datatype 		element;
 	struct 	Node 	*next;
 };
 struct Node *top;
 
-struct Node * CreatListR1(){
+// 创建链表
+// 先创建一个头结点
+// 然后为每一个数组分配一个节点
+struct Node * CreatListR1(){ 
 	char 			ch;
 	struct Node		*head,*s,*r;
 	head = (struct Node*)malloc(sizeof(struct Node));
@@ -372,6 +402,7 @@ struct Node * CreatListR1(){
 	return head;
 }
 
+// 输出链表
 void Output(struct Node *L){
 	struct Node 	*head;
 	head = L;
@@ -383,6 +414,7 @@ void Output(struct Node *L){
 	printf("%c",head->element );
 }
 
+// 出栈
 datatype *PopL(struct Node *S){
 	datatype *ret;
 	if(S==NULL){
@@ -395,6 +427,7 @@ datatype *PopL(struct Node *S){
 	}
 }
 
+// 入栈
 struct Node * PushL(struct Node *S,datatype e){
 	struct Node *p;
 	p=(struct Node *)malloc(sizeof(struct Node));
@@ -404,23 +437,28 @@ struct Node * PushL(struct Node *S,datatype e){
 	return S;
 }
 
+// 判断是否回文
 int JudgeL(struct Node *L){
 	int 				length=0;
 	struct Node 		*p;
 	struct Node 		*head;
 	head = L;
+	// 链表长度
 	while(head!=NULL){
 		length++;
 		head = head->next;
 	}
 	length--;
 	L = L->next;
+	// 先把一半链表长度的节点出栈
 	for (int i = 0; i < (length+1)/2; i++)
 	{
 		p = PushL(p,L->element);
 		L = L->next;
 	}
+	// 分别对长度为奇偶的做判断
 	if(length%2==0){
+		// 长度为偶数的
 		while(L!=NULL){
 			if(*PopL(p)==L->element){
 				p = p->next;
@@ -432,6 +470,7 @@ int JudgeL(struct Node *L){
 		}
 		return 1;
 	}else{
+		// 长度为奇数的
 		p = p->next;
 		while(L!=NULL){
 			if(*PopL(p)==L->element){
