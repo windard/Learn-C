@@ -682,6 +682,63 @@ if __name__ == '__main__':
 迭代版
 
 ```
+#include "stdio.h"
+
+#define N 15
+
+void mergeSort(int a[]){
+    int     b[N];
+    int     i, j, m, n, x, y, t;
+
+    for (i = 1; i < N; i *= 2)
+    {
+        for (j = 0; j < N; j += 2*i)
+        {
+            x = n = j + i < N ? j + i : N;
+            y = j + i*2 < N ? j + i*2 : N;
+
+            t = m = j;
+
+            while(m < n && x < y)
+                b[t++] = a[m] < a[x] ? a[m++] : a[x++];
+            while(m < n)
+                b[t++] = a[m++];
+            while(x < y)
+                b[t++] = a[x++];
+        }
+
+        for (j = 0; j < N; ++j)
+        {
+            a[j] = b[j];
+        }
+    }
+
+    for (i = 0; i < N; ++i)
+    {
+        a[i] = b[i];
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    int         a[N] = {10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53};
+
+    printf("Origin : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+
+    mergeSort(a);
+
+    printf("\nSorted : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+
+    return 0;
+}
 
 ```
 
@@ -806,10 +863,142 @@ int main(int argc, char const *argv[])
 
 ```
 
+归并排序的逻辑复杂度为
+
+Python 版的归并排序
+
+迭代版
+
+```
+# coding=utf-8
+
+
+def mergeSort(array):
+    b = [0 for i in xrange(len(array))]
+
+    i = 1
+    while 1:
+        if i >= len(array):
+            break
+
+        for j in xrange(0, len(b), 2*i):
+
+            k = m = j
+            n = x = j + i if j + i < len(b) else len(b)
+            y = j + 2*i if j + 2*i < len(b) else len(b)
+
+            while (m < n and x < y):
+                if array[m] < array[x]:
+                    b[k] = array[m]
+                    m += 1
+                else:
+                    b[k] = array[x]
+                    x += 1
+                k += 1
+
+            while (m < n):
+                b[k] = array[m]
+                k += 1
+                m += 1
+
+            while (x < y):
+                b[k] = array[x]
+                k += 1
+                x += 1
+
+        for j in xrange(len(b)):
+            array[j] = b[j]
+
+        i *= 2
+
+
+if __name__ == '__main__':
+    a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
+    print a
+
+    mergeSort(a)
+    print a
+
+```
+
+递归版
+
+```
+# coding=utf-8
+
+
+def merge_sort(a, b, start, end):
+    if start >= end:
+        return
+
+    mid = (start + end) / 2
+    merge_sort(a, b, start, mid)
+    merge_sort(a, b, mid+1, end)
+
+    k = m = start
+    n = mid
+    x = mid + 1
+    y = end
+
+    while (m <= n and x <= y):
+        if a[m] < a[x]:
+            b[k] = a[m]
+            m += 1
+        else:
+            b[k] = a[x]
+            x += 1
+        k += 1
+
+    while (m <= n):
+        b[k] = a[m]
+        k += 1
+        m += 1
+
+    while (x <= y):
+        b[k] = a[x]
+        k += 1
+        x += 1
+
+    for i in xrange(start, end+1):
+        a[i] = b[i]
+
+
+def mergeSort(array):
+    b = [0 for i in xrange(len(array))]
+    merge_sort(array, b, 0, len(array)-1)
+
+
+if __name__ == '__main__':
+    a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
+    print a
+
+    mergeSort(a)
+    print a
+
+```
+
+Python 无论是递归版还是迭代版都非常的丑陋，简直就是 C 语言的完全重写，没意思。。。
+
+
 ### 快速排序
 
 快速排序也是采用分治思想的一种排序算法。
 
+首先从数列中取出一个数作为基准数，比它大的数放在它的右边，比它小或者等于的数全放在它的左边，如此重复，直到个区间只剩下一个数。
+
+同样的也有迭代法和递归法
+
+迭代法
+
+```
+
+```
+
+递归法
+
+```
+
+```
 
 
 ### 鸡尾酒排序

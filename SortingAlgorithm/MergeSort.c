@@ -59,8 +59,32 @@
 // }
 
 void mergeSort(int a[]){
-    int     i, j, m, n, t, g;
-    
+    int     b[N];
+    int     i, j, m, n, x, y, t;
+
+    for (i = 1; i < N; i *= 2)
+    {
+        for (j = 0; j < N; j += 2*i)
+        {
+            x = n = j + i < N ? j + i : N;
+            y = j + i*2 < N ? j + i*2 : N;
+
+            t = m = j;
+
+            while(m < n && x < y)
+                b[t++] = a[m] < a[x] ? a[m++] : a[x++];
+            while(m < n)
+                b[t++] = a[m++];
+            while(x < y)
+                b[t++] = a[x++];
+        }
+
+        for (j = 0; j < N; ++j)
+        {
+            a[j] = b[j];
+        }
+    }
+
 }
 
 int main(int argc, char const *argv[])
