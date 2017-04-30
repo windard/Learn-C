@@ -42,48 +42,71 @@
 #     merge_sort(array, b, 0, len(array)-1)
 
 
+# def mergeSort(array):
+#     b = [0 for i in xrange(len(array))]
+
+#     i = 1
+#     while 1:
+#         if i >= len(array):
+#             break
+
+#         for j in xrange(0, len(b), 2*i):
+
+#             k = m = j
+#             n = x = j + i if j + i < len(b) else len(b)
+#             y = j + 2*i if j + 2*i < len(b) else len(b)
+
+#             while (m < n and x < y):
+#                 if array[m] < array[x]:
+#                     b[k] = array[m]
+#                     m += 1
+#                 else:
+#                     b[k] = array[x]
+#                     x += 1
+#                 k += 1
+
+#             while (m < n):
+#                 b[k] = array[m]
+#                 k += 1
+#                 m += 1
+
+#             while (x < y):
+#                 b[k] = array[x]
+#                 k += 1
+#                 x += 1
+
+#         for j in xrange(len(b)):
+#             array[j] = b[j]
+
+#         i *= 2
+
+
 def mergeSort(array):
-    b = [0 for i in xrange(len(array))]
+    def merge_sort(left, right):
+        i, j = 0, 0
+        result = []
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+        result += left[i:]
+        result += right[j:]
+        return result
 
-    i = 1
-    while 1:
-        if i >= len(array):
-            break
-
-        for j in xrange(0, len(b), 2*i):
-
-            k = m = j
-            n = x = j + i if j + i < len(b) else len(b)
-            y = j + 2*i if j + 2*i < len(b) else len(b)
-
-            while (m < n and x < y):
-                if array[m] < array[x]:
-                    b[k] = array[m]
-                    m += 1
-                else:
-                    b[k] = array[x]
-                    x += 1
-                k += 1
-
-            while (m < n):
-                b[k] = array[m]
-                k += 1
-                m += 1
-
-            while (x < y):
-                b[k] = array[x]
-                k += 1
-                x += 1
-
-        for j in xrange(len(b)):
-            array[j] = b[j]
-
-        i *= 2
+    if len(array) <= 1:
+        return array
+    num = len(array) / 2
+    left = mergeSort(array[:num])
+    right = mergeSort(array[num:])
+    return merge_sort(left, right)
 
 
 if __name__ == '__main__':
     a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
     print a
 
-    mergeSort(a)
+    print mergeSort(a)
     print a
