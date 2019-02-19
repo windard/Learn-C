@@ -90,4 +90,25 @@ stdlib.h
 　　int _Cdecl ungetch (int ch);
 
 
+Different from getc,getch,getche,getchar
 
+Firstly, getch() and getche() are non standard library functions found in conio.h. Hence, they are useless and should never be used (nor the Turbo C/C++ compilers).
+
+The difference between getchar() and getc(FILE *stream) is that, getc can read input from any stream, while getchar can only read from the standard input. Thus you can say that
+getchar() = getc(stdin)
+
+
+(1) getch()和getche()函数
+    这两个函数都是从键盘上读入一个字符。其调用格式为:
+     getch();
+     getche();
+    两者的区别是: getch()函数不将读入的字符回显在显示屏幕上, 而getche() 函数却将读入的字符回显到显示屏幕上。
+
+    getch 不回显可以用来最后的 “按任意键结束” getche 可以用来输入
+
+(2) getchar()函数也是从键盘上读入一个字符, 并带回显。它与前面两个函数
+的区别在于: getchar()函数等待输入直到按回车才结束,  回车前的所有输入字
+符都会逐个显示在屏幕上
+
+
+conio.h is known to be Windows or MSDOS specific. Not on Mac
