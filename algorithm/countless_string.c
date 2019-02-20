@@ -14,7 +14,7 @@ linklist * CreatListR1(){
 	linklist		*head,*s,*r;
 	head = (linklist*)malloc(sizeof(linklist));
 	r = head;
-	printf("请输入顺序表L中的元素，以#结束\n");
+	printf("请输入顺序表L中的元素，以 Ctrl + C 结束\n");
 	while((ch=getche())!=EOF){
 		s = (linklist*)malloc(sizeof(linklist));
 		s->data = ch;
