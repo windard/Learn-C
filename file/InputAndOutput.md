@@ -4,7 +4,7 @@
 
 输出函数 `putchar` , `puts` , `printf`
 
-`getche` , `getchar` , `getch` 的区别和联系
+### `getche` , `getchar` , `getch` 的区别和联系
 
 相同
 
@@ -12,14 +12,19 @@
 
 差异
 
-1. `getche` 和 `getch` 的头文件是 `conio.h`，`getchar` 的头文件是 `stdio.h`
+1. `getche` 和 `getch` 的头文件是 `conio.h`，`getchar` 的头文件是 `stdio.h`，前者是标准
 2. `getche` 和 `getchar` 输入回显，`getch` 输入不回显。 
 3. `getche` 和 `getch` 输入一个字符，返回一个字符，`getchar` 输入直至回车符才返回，但是只接受一个字符，剩余字符会被保留在缓存区。
 4. `getch` 因其不回显，一般常用于 `按任意键继续`。
+5. `conio.h` 是 Windows 库，并无在 Mac 上。
 
 `scanf` 最常用的输入方式，头文件 `stdio.h` 。
 
 `gets` 读入字符换，以回车结束，但是字符串中不包括回车符，以 `\0` 代替回车符返回，头文件 `stdio.h`，返回字符串指针，一般使用 `puts` 输出 。
+
+`getc` 读取文件或者其他任何流文件，包括屏幕输入，按个读取。
+`fgets` 读取文件，按行读取。 结尾返回 NULL，布尔值为 FALSE
+`fgetc` 服务文件，按个读取。 结尾返回 EOF，布尔值为 TRUE
 
 ### 实例
 
