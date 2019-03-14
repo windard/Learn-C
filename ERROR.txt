@@ -8,6 +8,8 @@
 	*就是需要#include<stdio.h>
 	*如果有字符串操作
 	*则需要#include<string.h>
+	*如果有exit(0)
+	*需要#include<stdlib.h>
 	*
 	*/
 	/*
