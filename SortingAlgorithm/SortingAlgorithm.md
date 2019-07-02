@@ -140,7 +140,7 @@ int main(int argc, char const *argv[])
 
 ```
 
-标准的冒泡排序的逻辑复杂度为 N*(N+1)/2
+标准的冒泡排序的逻辑复杂度为 `N*(N+1)/2`
 
 Python 版的冒泡排序
 
@@ -1522,7 +1522,7 @@ if __name__ == '__main__':
 
 ### 堆排序
 
-堆排序和归并排序，快速排序一样都是时间复杂度为 O(N*logN) 的几种常见排序方法。
+堆排序和归并排序，快速排序一样都是时间复杂度为 `O(N*logN)` 的几种常见排序方法。
 
 堆是完全二叉树，或者是近似完全二叉树。
 
@@ -1723,6 +1723,182 @@ if __name__ == '__main__':
     print a
 
     heapSort(a)
+    print a
+
+```
+
+
+### 慢排序
+
+先切分，再排期。利用迭代，其实有点像分治，或者二分排序。只不过慢排序在分治之后只取最大值，每次分治都是为了拿到最大值，然后将最大值拿到最后。
+
+```
+#include "stdio.h"
+
+#define N 15
+
+
+void solwSort(int a[], int start, int end){
+    if (start >= end) return;
+
+    int     m;
+    int     t;
+    m = (start + end) / 2;
+
+    solwSort(a, start, m);
+    solwSort(a, m+1, end);
+
+    if (a[m] > a[end]){
+        t      = a[end];
+        a[end] = a[m];
+        a[m]   = t;
+    }
+
+    solwSort(a, start, end-1);
+
+}
+
+int main(int argc, char const *argv[])
+{
+    int         t;
+    int         a[N] = {10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53};
+
+    printf("Origin : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+
+    solwSort(a, 0, N-1);
+
+    printf("\nSorted : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+    return 0;
+}
+
+```
+
+python 版的慢排序
+
+```
+# coding=utf-8
+
+
+def slowSort(array, start, end):
+    if start >= end:
+        return
+
+    mid = (start + end) / 2
+    slowSort(array, start, mid)
+    slowSort(array, mid + 1, end)
+
+    if array[mid] > array[end]:
+        array[mid], array[end] = array[end], array[mid]
+
+    slowSort(array, start, end - 1)
+
+
+if __name__ == '__main__':
+    a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
+    print a
+
+    start = 0
+    end = len(a) - 1
+    slowSort(a, start, end)
+    print a
+
+```
+
+
+### 完美排序算法
+
+也叫漂亮排序算法。但是其实算法写起来一点都不漂亮，首先将首位替换，然后先排前三分之二，再排后三分之二，再排前三分之二。
+
+一顿操作猛如虎，一看性能二点七。
+
+时间复杂度 T(n) = 3T(2n/3 ) + 1 = O(n^2.71)
+
+而且虽然时间复杂度小一些，但是空间复杂度上，使用递归的话还是很耗内存的。
+
+```
+#include "stdio.h"
+
+#define N 15
+
+
+void stoogeSort(int a[], int start, int end){
+    int     t;
+    int     s;
+
+    if (a[start] > a[end]){
+        t        = a[start];
+        a[start] = a[end];
+        a[end]   = t;
+    }
+    if (start + 1 == end){
+        return;
+    }
+
+    s = (end - start + 1) / 3;
+    stoogeSort(a, start, end - s);
+    stoogeSort(a, start + s, end);
+    stoogeSort(a, start, end - s);
+
+}
+
+
+int main(int argc, char const *argv[])
+{
+    int         t;
+    int         a[N] = {10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53};
+
+    printf("Origin : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+
+    stoogeSort(a, 0, N-1);
+
+    printf("\nSorted : ");
+    for (int i = 0; i < N; ++i)
+    {
+        printf("%4d", a[i]);
+    }
+    return 0;
+}
+
+```
+
+python 版本
+
+```
+# coding=utf-8
+
+
+def stoogeSort(array, start, end):
+    if array[start] > array[end]:
+        array[start], array[end] = array[end], array[start]
+    if start + 1 == end:
+        return
+
+    split = (end - start + 1) / 3
+    stoogeSort(array, start, end - split)
+    stoogeSort(array, start + split, end)
+    stoogeSort(array, start, end - split)
+
+
+if __name__ == '__main__':
+    a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
+    print a
+
+    start = 0
+    end = len(a) - 1
+    stoogeSort(a, start, end)
+
     print a
 
 ```
