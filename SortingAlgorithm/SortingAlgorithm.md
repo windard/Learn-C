@@ -1309,7 +1309,7 @@ int main(int argc, char const *argv[])
 
 ```
 
-快速排序算法的逻辑复杂度为
+快速排序算法的时间复杂度为 O(nlogn)
 
 Python 版快速排序算法
 
@@ -1317,16 +1317,25 @@ Python 版快速排序算法
 # coding=utf-8
 
 
-def quickSort(a):
+def quick_sort(nums):
+    if len(nums) < 2:
+        return nums
+    index = nums[0]
+    left = []
+    right = []
+    for n in nums[1:]:
+        if n < index:
+            left.append(n)
+        else:
+            right.append(n)
 
-    return a if len(a) <=1 else quickSort([x for x in a[1:] if x < a[0]]) + [a[0]] + quickSort([x for x in a[1:] if x >= a[0]])
+    return quick_sort(left) + [index] + quick_sort(right)
 
 
 if __name__ == '__main__':
-    a = [10, 1, 23, -5, 0, 78, 11, 104, 65, -1, 12, 23, 36, 3, 53]
-    print a
+    print quick_sort([4,6,67,12,7,12,6,9,1245,52])
+    print quick_sort([1,2,5,7,8,678,23,67,1,677,24,7,23])
 
-    print quickSort(a)
 ```
 
 ### 鸡尾酒排序
